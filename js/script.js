@@ -1,6 +1,6 @@
 "use strict";
 
-/*const slides = [
+const slides = [
 {
     image: 'img/01.webp',
         title: 'Marvel\'s Spiderman Miles Morale',
@@ -24,7 +24,7 @@
     }
 ];
 
-console.log(slides);*/
+console.log(slides);
 
 const { createApp } = Vue;
 
@@ -58,3 +58,44 @@ createApp({
 
     }
 }).mount("#app");
+
+let active = 0;
+const slider = document.querySelector('.slider');
+const prev = document.querySelector('.prev');
+const next = document.querySelector('.next');
+let itemsContent = '';
+
+const items = document.querySelectorAll('.item');
+items[active].classList.add('show');
+
+console.log(items);
+
+for (let i = 0; i < slides.length; i++) {
+    console.log(slides[i]);
+    itemsContent += `<div class="item"><img src="img/${slides[i]}" alt=""></div>`
+}
+
+
+slider.innerHTML = slider.innerHTML + itemsContent;
+
+
+prev.addEventListener('click', function () {
+    if(active > 0){
+        items[active].classList.remove('show');
+        active--;
+        items[active].classList.add('show');
+    }
+});
+
+next.addEventListener('click', function () {
+    if(active < items.length - 1){
+        console.log('incremento active');
+        items[active].classList.remove('show');
+        active++;
+        items[active].classList.add('show');
+    }
+});
+
+
+
+
